@@ -1,13 +1,18 @@
 class Solution:
-    def longestCommonPrefix(self, strs):
+    def longestCommonPrefix(self, strs: List[str]) -> str:
         if not strs:
-            return ""  # If the list is empty, there's no common prefix
-
+            return ""
+        
         min_length = len(min(strs, key=len))
         
         for i in range(min_length):
-            current_char = strs[0][i]
-            for string in strs[1:]:
-                if string[i] != current_char:
+            curr = strs[0][i]
+            
+            for strings in strs[1:]:
+                if strings[i] != curr:
                     return strs[0][:i]
-        return strs[0][:min_length] 
+            
+        return strs[0][:min_length]
+                
+            
+            

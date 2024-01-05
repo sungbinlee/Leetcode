@@ -3,7 +3,7 @@ class Solution:
         if x < 0:
             return False
         
-        palindrome = list(str(x))
+        palindrome = str(x)
         if palindrome == palindrome[::-1]:
             return True
         

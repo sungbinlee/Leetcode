@@ -8,10 +8,10 @@ class Solution:
         for i in range(min_length):
             curr = strs[0][i]
             
-            for strings in strs[1:]:
-                if strings[i] != curr:
+            for string in strs[1:]:
+                if string[i] != curr:
                     return strs[0][:i]
-            
+                
         return strs[0][:min_length]
                 
             

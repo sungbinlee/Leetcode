@@ -9,17 +9,15 @@ class Solution:
         for num in nums:
             nums_set.add(num)
             
-        print(nums_set)
-            
         for num in nums_set:
             if num - 1 not in nums_set:
-                cnt = 1
                 target = num + 1
+                cnt = 1
                 while target in nums_set:
-                    target += 1
                     cnt += 1
-                longest = max(longest, cnt)
+                    target += 1
+                longest = max(cnt, longest)
         return longest
-        
+            
         
     

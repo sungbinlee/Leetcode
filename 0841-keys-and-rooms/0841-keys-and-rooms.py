@@ -2,11 +2,10 @@ from collections import deque
 
 class Solution:
     def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
-        visited = []
-        
+        visited = set()
         
         def dfs(v):
-            visited.append(v)
+            visited.add(v)
             for next_v in rooms[v]:
                 if next_v not in visited:
                     dfs(next_v)

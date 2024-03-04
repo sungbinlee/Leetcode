@@ -6,5 +6,6 @@ class Solution:
             dic[v] = i
             
         for i, v in enumerate(nums):
-            if target - v in dic and i is not dic[target-v]:
+            complement = target - v
+            if complement in dic and i is not dic[target-v]:
                 return [i, dic[target-v]]

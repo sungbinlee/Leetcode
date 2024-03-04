@@ -1,12 +1,10 @@
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        nums_hash = {}
+        dic = {}
         
-        for i, num in enumerate(nums):
-            nums_hash[num] = i
-        
-        for i, num in enumerate(nums):
-            if target - num in nums_hash and i != nums_hash[target-num]:
-                return [i, nums_hash[target-num]]
+        for i, v in enumerate(nums):
+            dic[v] = i
             
-            
+        for i, v in enumerate(nums):
+            if target - v in dic and i is not dic[target-v]:
+                return [i, dic[target-v]]

@@ -2,26 +2,12 @@ from collections import deque
 
 class Solution:
     def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
-        # DFS 재귀 구현
-#         visited = set()
-        
-#         def dfs(v):
-#             visited.add(v)
-#             for next_v in rooms[v]:
-#                 if next_v not in visited:
-#                     dfs(next_v)
-        
-#         dfs(0)
-        
-#         return len(visited) == len(rooms)
-
-        # BFS 구현
         visited = [False] * len(rooms)
         
-        def bfs(v):
+        def bfs(start_v):
             q = deque()
-            q.append(v)
-            visited[0] = True
+            q.append(start_v)
+            visited[start_v] = True
             
             while q:
                 cur_v = q.popleft()
@@ -33,6 +19,3 @@ class Solution:
         bfs(0)
         
         return all(visited)
-                
-        
-        

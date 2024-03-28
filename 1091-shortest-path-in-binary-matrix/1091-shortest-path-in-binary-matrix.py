@@ -4,10 +4,9 @@ class Solution:
     def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:
         # 좌상단 우하단으로 이동해야함
         # 대각선으로 이동가능
-        answer = -1
         
         if grid[0][0] == 1 or grid[-1][-1] == 1:
-            return answer
+            return -1
         
         rows = len(grid)
         cols = len(grid[0])

@@ -2,34 +2,41 @@ from collections import deque
 
 class Solution:
     def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:
-        shortest_path = -1
-        rows = len(grid)
-        cols = len(grid[0])
-        visited = [[False] * cols for _ in range(rows)]
-        q = deque()
-        q.append((0, 0, 1))
-        visited[0][0] = True
+        # 좌상단 우하단으로 이동해야함
+        # 대각선으로 이동가능
+        answer = -1
         
         if grid[0][0] == 1 or grid[-1][-1] == 1:
-            return shortest_path
+            return answer
         
-        delta = [(1, 0), (-1, 0), (0, 1), (0, -1),
-                (1, 1), (-1, 1), (1, -1), (-1, -1)]
+        rows = len(grid)
+        cols = len(grid[0])
         
-        while q:
-            cur_x, cur_y, cur_len = q.popleft()
+        def is_valid(x, y):
+            return 0 <= x < rows and 0 <= y < cols
+        
+        def bfs():
+            q = deque()
+            visited = [[False] * cols for _ in range(rows)]
+            q.append((0, 0, 1))
+            visited[0][0] = True
+
+            delta = [(1, 0), (0, 1), (-1, 0), (0, -1),
+                    (1, 1), (-1, 1), (-1, -1), (1, -1)]
             
-            if cur_x == rows - 1 and cur_y == cols - 1:
-                shortest_path = cur_len
-                break
-                
-            for dx, dy in delta:
-                next_x = cur_x + dx
-                next_y = cur_y + dy
-                if next_x >= 0 and next_x < rows and next_y >= 0 and next_y < cols:
-                    if grid[next_x][next_y] == 0 and not visited[next_x][next_y]:
-                        q.append((next_x, next_y, cur_len + 1))
+            while q:
+ 
+                cur_x, cur_y, cur_d = q.popleft()
+                if cur_x == rows-1 and cur_y == cols-1:
+                    return cur_d
+                for dx, dy in delta:
+                    next_x, next_y = cur_x + dx, cur_y + dy
+                    if is_valid(next_x, next_y) and grid[next_x][next_y] == 0 and not visited[next_x][next_y]:
+                        q.append((next_x, next_y, cur_d + 1))
                         visited[next_x][next_y] = True
-                
+            
+            return -1
+
+        answer = bfs()
         
-        return shortest_path
+        return answer

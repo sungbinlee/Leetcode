@@ -1,5 +1,6 @@
 from collections import deque
 
+
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
         answer = -1
@@ -8,20 +9,17 @@ class Solution:
         visited = set()
         
         q = deque()
-        q.append((depth, amount))
-
+        q.append((amount, depth))
+        
         while q:
-            curr_depth, curr_amount = q.popleft()
-            if curr_amount == 0:
-                answer = curr_depth
+            cur_amount, cur_depth = q.popleft()
+            if cur_amount == 0:
+                answer = cur_depth
                 break
             for coin in coins:
-                next_amount = curr_amount - coin
+                next_amount = cur_amount - coin
                 if next_amount >= 0 and next_amount not in visited:
-                    q.append((curr_depth + 1, next_amount))
+                    q.append((next_amount, cur_depth + 1))
                     visited.add(next_amount)
-        
+                    
         return answer
-    
-    
-    

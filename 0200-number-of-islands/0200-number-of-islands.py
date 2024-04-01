@@ -1,40 +1,33 @@
 from collections import deque
 
+
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
-        cnt = 0
-        rows = len(grid)
-        cols = len(grid[0])
+        def in_range(x, y):
+            return 0 <= x < len(grid) and 0 <= y < len(grid[0])
         
-        visited = [[False] * cols for _ in range(rows)]
-        
-        dx = [1, -1, 0, 0]
-        dy = [0, 0, 1, -1]
-        
-        def is_range(x, y):
-            if 0 <= x < rows and 0 <= y < cols:
-                return True
-            else:
-                return False
         
         def bfs(x, y):
             q = deque()
             q.append((x, y))
             visited[x][y] = True
+            delta = [(1, 0), (-1, 0), (0, 1), (0, -1)]
             
             while q:
-                cur_x, cur_y = q.pop()
-                for i in range(4):
-                    next_x, next_y = cur_x + dx[i], cur_y + dy[i]
-                    if is_range(next_x, next_y) and not visited[next_x][next_y] and grid[next_x][next_y] == "1":
+                cur_x, cur_y = q.popleft()
+                for dx, dy in delta:
+                    next_x, next_y = cur_x + dx, cur_y + dy
+                    if in_range(next_x, next_y) and not visited[next_x][next_y] and grid[next_x][next_y] == "1":
                         q.append((next_x, next_y))
                         visited[next_x][next_y] = True
-                    
+                        
         
-        for i in range(rows):
-            for j in range(cols):
+        visited = [[False] * len(grid[0]) for _ in range(len(grid))]
+        count = 0
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
                 if grid[i][j] == "1" and not visited[i][j]:
                     bfs(i, j)
-                    cnt += 1
-                    
-        return cnt
+                    count += 1
+        
+        return count

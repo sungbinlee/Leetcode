@@ -1,22 +1,22 @@
-from collections import deque
+from collections import deque, defaultdict
 
 
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # 위상 정렬로
         visited = []
-        graph = [[] for _ in range(numCourses)]
+        graph = defaultdict(list)
         indegree = [0] * numCourses
+        q = deque()
         
         for u, v in prerequisites:
             graph[u].append(v)
             indegree[v] += 1
-        
-        q = deque()
-        
+            
         for v in range(numCourses):
             if indegree[v] == 0:
                 q.append(v)
-                
+        
         while q:
             cur_v = q.popleft()
             visited.append(cur_v)
@@ -26,8 +26,9 @@ class Solution:
                 
                 if indegree[next_v] == 0:
                     q.append(next_v)
-                    
+        
         if len(visited) == numCourses:
             return True
-        
         return False
+        
+        

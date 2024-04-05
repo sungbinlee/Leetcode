@@ -11,7 +11,7 @@ class Solution:
             graph[edges[i][1]].append((edges[i][0], succProb[i]))
         
         pq = []
-        probability = [0] * n
+        probabilities = [0] * n
         
         heappush(pq, (-1, start_node))
         
@@ -19,17 +19,17 @@ class Solution:
             cur_prob, cur_node = heappop(pq)
             cur_prob *= -1
             
-            if probability[cur_node] >= cur_prob:
+            if probabilities[cur_node] >= cur_prob:
                 continue
                 
-            probability[cur_node] = cur_prob
+            probabilities[cur_node] = cur_prob
             
             if cur_node == end_node:
                 return cur_prob
             
             for next_node, prob in graph[cur_node]:
                 next_prob = prob * cur_prob
-                if next_prob >= probability[next_node]:
+                if next_prob >= probabilities[next_node]:
                     heappush(pq, (-next_prob, next_node))
                     
         return 0

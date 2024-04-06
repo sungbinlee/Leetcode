@@ -4,15 +4,14 @@ from heapq import heappush, heappop
 
 class Solution:
     def maxProbability(self, n: int, edges: List[List[int]], succProb: List[float], start_node: int, end_node: int) -> float:
+        # 그래프 생성
         graph = defaultdict(list)
-        
         for i in range(len(edges)):
             graph[edges[i][0]].append((edges[i][1], succProb[i]))
             graph[edges[i][1]].append((edges[i][0], succProb[i]))
-        
-        pq = []
+
         probabilities = [0] * n
-        
+        pq = []
         heappush(pq, (-1, start_node))
         
         while pq:
@@ -28,8 +27,9 @@ class Solution:
                 return cur_prob
             
             for next_node, prob in graph[cur_node]:
-                next_prob = prob * cur_prob
-                if next_prob >= probabilities[next_node]:
+                next_prob = cur_prob * prob
+                if next_prob > probabilities[next_node]:
                     heappush(pq, (-next_prob, next_node))
                     
         return 0
+    

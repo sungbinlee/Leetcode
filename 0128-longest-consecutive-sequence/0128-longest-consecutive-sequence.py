@@ -4,20 +4,22 @@ class Solution:
         # 연속되는 엘리먼츠의 길이를 반환하라
         # 시간복잡도 o(n) 으로 풀어야한다. 
         longest = 0
+        
         nums_set = set()
         
-        for num in nums:
-            nums_set.add(num)
+        for i in nums:
+            nums_set.add(i)
             
-        for num in nums_set:
-            if num - 1 not in nums_set:
-                target = num + 1
+        for i in nums_set:
+            if i - 1 not in nums_set:
                 cnt = 1
+                target = i + 1
                 while target in nums_set:
-                    cnt += 1
-                    target += 1
-                longest = max(cnt, longest)
+                    cnt +=1
+                    target +=1
+                longest = max(longest, cnt)
+                
+        
         return longest
-            
         
     

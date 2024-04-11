@@ -1,4 +1,4 @@
-import collections
+from collections import defaultdict
 
 
 class Solution:
@@ -8,5 +8,4 @@ class Solution:
         for word in strs:
             anagrams[''.join(sorted(word))].append(word)
             
-        return list(anagrams.values())
-            
+        return anagrams.values()

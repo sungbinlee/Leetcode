@@ -8,6 +8,7 @@ class Solution:
                     memo[r][c] = 1
                 else:
                     memo[r][c] = memo[r-1][c] + memo [r][c-1]
+        print(memo)
         
         return memo[-1][-1]
                 

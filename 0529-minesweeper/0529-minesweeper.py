@@ -28,7 +28,6 @@ class Solution:
                         if (next_y, next_x) not in visited: #뭐인진 모름
                             if board[next_y][next_x] == "M":
                                 mine_cnt += 1
-                                flag = False
                             elif board[next_y][next_x] == "E":
                                 cnt += 1
                                 q.append((next_y, next_x))
